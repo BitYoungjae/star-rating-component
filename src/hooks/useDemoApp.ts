@@ -42,23 +42,13 @@ export const useDemoApp = () => {
       }
     });
 
-    starBoxElement.addEventListener('touchstart', () => {
-      isSelected = true;
-    });
-    starBoxElement.addEventListener('touchend', () => {
-      isSelected = false;
-    });
-    starBoxElement.addEventListener('touchcancel', () => {
-      isSelected = false;
-    });
-
     starBoxElement.addEventListener('touchmove', (e) => {
       const starBoxWidth = starBoxElement.offsetWidth;
       const { targetTouches } = e;
       const offsetX =
         targetTouches[0].clientX - starBoxElement.getBoundingClientRect().x;
 
-      if (isSelected && e.target === e.currentTarget) {
+      if (e.target === e.currentTarget) {
         const rate = offsetX / starBoxWidth;
 
         setFormData((prevFormData) => ({
