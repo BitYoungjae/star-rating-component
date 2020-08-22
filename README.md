@@ -12,6 +12,10 @@
 />
 ```
 
-## 데모 사이트
+## 영상
 
-[http://stars_bityoungjae.surge.sh](http://stars_bityoungjae.surge.sh)
+![데모영상](images/star-rating.gif)
+
+## 데모
+
+- [http://stars_bityoungjae.surge.sh](http://stars_bityoungjae.surge.sh)
