@@ -28,34 +28,51 @@ export const useDemoApp = () => {
       isSelected = false;
     });
 
-    starBoxElement.addEventListener('mousemove', (e) => {
-      const starBoxWidth = starBoxElement.offsetWidth;
-      const { offsetX } = e;
+    starBoxElement.addEventListener(
+      'mousemove',
+      (e) => {
+        const starBoxWidth = starBoxElement.offsetWidth;
+        const offsetX = e.clientX - starBoxElement.getBoundingClientRect().x;
 
-      if (isSelected && e.target === e.currentTarget) {
-        const rate = offsetX / starBoxWidth;
+        if (isSelected) {
+          const rate = offsetX / starBoxWidth;
 
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          now: `${Math.round(+prevFormData.max * rate)}`,
-        }));
-      }
-    });
+          setFormData((prevFormData) => {
+            const max = +prevFormData.max;
+            const calculatedNow = Math.ceil(max * rate);
+            return {
+              ...prevFormData,
+              now: `${
+                calculatedNow < 0
+                  ? 0
+                  : calculatedNow > max
+                  ? max
+                  : calculatedNow
+              }`,
+            };
+          });
+        }
+      },
+      false
+    );
 
     starBoxElement.addEventListener('touchmove', (e) => {
       const starBoxWidth = starBoxElement.offsetWidth;
       const { targetTouches } = e;
       const offsetX =
         targetTouches[0].clientX - starBoxElement.getBoundingClientRect().x;
+      const rate = offsetX / starBoxWidth;
 
-      if (e.target === e.currentTarget) {
-        const rate = offsetX / starBoxWidth;
-
-        setFormData((prevFormData) => ({
+      setFormData((prevFormData) => {
+        const max = +prevFormData.max;
+        const calculatedNow = Math.ceil(max * rate);
+        return {
           ...prevFormData,
-          now: `${Math.round(+prevFormData.max * rate)}`,
-        }));
-      }
+          now: `${
+            calculatedNow < 0 ? 0 : calculatedNow > max ? max : calculatedNow
+          }`,
+        };
+      });
     });
   }, [setFormData]);
 

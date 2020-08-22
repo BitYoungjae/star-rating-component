@@ -35,15 +35,16 @@ const App = () => {
         onChange={changeHandler}
       />
       <br />
-      <StarRating
-        now={+formData.now}
-        max={+formData.max}
-        maximumStars={+formData.starCount}
-        sStarSize='8.5vmin'
-        sStarColor='red'
-        sBackgroundColor='#ddd'
-        ref={starBoxRef}
-      />
+      <StarRatingWrapper ref={starBoxRef}>
+        <StarRating
+          now={+formData.now}
+          max={+formData.max}
+          maximumStars={+formData.starCount}
+          sStarSize='8.5vmin'
+          sStarColor='red'
+          sBackgroundColor='#ddd'
+        />
+      </StarRatingWrapper>
       <InfoMSG>별점 위에서 좌우로 슬라이드 해보세요!</InfoMSG>
     </Container>
   );
@@ -53,6 +54,10 @@ const InfoMSG = styled.p`
   font-size: 1rem;
   font-weight: bold;
   color: #555;
+`;
+
+const StarRatingWrapper = styled.div`
+  padding: 1.5rem;
 `;
 
 const Container = styled.main`
