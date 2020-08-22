@@ -18,7 +18,7 @@ const StarRating: React.FC<StarRatingProps> = ({
   sBackgroundColor = '#ddd',
   maximumStars = 5,
 }) => {
-  const perStar = Math.round(max / maximumStars);
+  const perStar = max / maximumStars;
   const filledStars = Math.floor(now / perStar);
   const blankStars = maximumStars - filledStars - 1;
   const remain = ((now % perStar) / perStar) * 100;
@@ -71,6 +71,8 @@ const StarRating: React.FC<StarRatingProps> = ({
       </StarBox>
     );
   }
+
+  console.log({ now, max, filledStars, remain, blankStars });
 
   const calculatedStarList = [
     ...getStarList({
