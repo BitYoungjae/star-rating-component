@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
-import StarRating from './StarRating/StarRating';
+import StarRating from './StarRating';
 import styled from 'styled-components';
 
 const App = () => {
