@@ -14,7 +14,17 @@
 
 ## 영상
 
+### 기본 데모영상
+
 ![데모영상](images/star-rating.gif)
+
+### 터치 슬라이드 구현
+
+![터치 슬라이드](images/star-rating-touch.gif)
+
+### 큰 범위 슬라이드 구현
+
+![큰 범위 슬라이드](images/star-rating-mouse.gif)
 
 ## 의존성
 
