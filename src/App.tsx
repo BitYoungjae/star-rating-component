@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
 import StarRating from './StarRating';
 import styled from 'styled-components';
 
@@ -10,6 +10,40 @@ const App = () => {
     max: '100',
     starCount: '10',
   });
+
+  const starBoxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const starBoxElement = starBoxRef.current;
+    if (!starBoxElement) return;
+
+    const starBoxWidth = starBoxElement.offsetWidth;
+    let isSelected = false;
+
+    starBoxElement.addEventListener('mousedown', () => {
+      isSelected = true;
+    });
+
+    starBoxElement.addEventListener('mouseup', () => {
+      isSelected = false;
+    });
+
+    starBoxElement.addEventListener('mouseleave', () => {
+      isSelected = false;
+    });
+
+    starBoxElement.addEventListener('mousemove', (e) => {
+      const { offsetX } = e;
+      if (isSelected && e.target === e.currentTarget) {
+        const rate = offsetX / starBoxWidth;
+
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          now: `${Math.round(+prevFormData.max * rate)}`,
+        }));
+      }
+    });
+  }, [setFormData]);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -52,8 +86,10 @@ const App = () => {
         now={+formData.now}
         max={+formData.max}
         maximumStars={+formData.starCount}
+        sStarSize='3rem'
         sStarColor='red'
         sBackgroundColor='#ddd'
+        ref={starBoxRef}
       />
     </Container>
   );

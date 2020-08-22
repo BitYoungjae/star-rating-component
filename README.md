@@ -25,3 +25,4 @@
 ## 데모
 
 - [http://stars_bityoungjae.surge.sh](http://stars_bityoungjae.surge.sh)
+  - 슬라이드 조작이 가능하도록 수정하였습니다.
