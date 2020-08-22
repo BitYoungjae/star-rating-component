@@ -87,12 +87,11 @@ const StarRating: React.FC<StarRatingProps> = React.forwardRef<
     }
 
     return (
-      <StarBox>
+      <StarBox ref={ref}>
         {calculatedStarList.map(
           ({ rate, sBackgroundColor, sStarColor }, index) => (
             <Star
               key={index}
-              ref={ref}
               rate={rate}
               sStarColor={sStarColor}
               sBackgroundColor={sBackgroundColor}
