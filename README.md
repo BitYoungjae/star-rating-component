@@ -16,6 +16,12 @@
 
 ![데모영상](images/star-rating.gif)
 
+## 의존성
+
+- react
+- typescript
+- styled-components
+
 ## 데모
 
 - [http://stars_bityoungjae.surge.sh](http://stars_bityoungjae.surge.sh)
