@@ -72,8 +72,6 @@ const StarRating: React.FC<StarRatingProps> = ({
     );
   }
 
-  console.log({ now, max, filledStars, remain, blankStars });
-
   const calculatedStarList = [
     ...getStarList({
       count: filledStars,
