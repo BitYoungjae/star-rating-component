@@ -1,58 +1,68 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useState, ChangeEvent } from 'react';
+import StarRating from './StarRating/StarRating';
+import styled from 'styled-components';
 
-function App() {
+const App = () => {
+  const [formData, setFormData] = useState({
+    now: '45',
+    max: '100',
+    starCount: '10',
+  });
+
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Container>
+      <label htmlFor='now'>현재 값 : </label>
+      <input
+        type='text'
+        name='now'
+        id='now'
+        value={+formData.now}
+        onChange={changeHandler}
+      />
+      <br />
+      <label htmlFor='max'>최대 값 : </label>
+      <input
+        type='text'
+        name='max'
+        id='max'
+        value={+formData.max}
+        onChange={changeHandler}
+      />
+      <br />
+      <label htmlFor='starCount'>별 갯수 : </label>
+      <input
+        type='text'
+        name='starCount'
+        id='starCount'
+        value={+formData.starCount}
+        onChange={changeHandler}
+      />
+      <br />
+      <StarRating
+        now={+formData.now}
+        max={+formData.max}
+        maximumStars={+formData.starCount}
+        sStarColor='red'
+        sBackgroundColor='#ddd'
+      />
+    </Container>
   );
-}
+};
+
+const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
+
+  justify-content: center;
+  align-items: center;
+`;
 
 export default App;
