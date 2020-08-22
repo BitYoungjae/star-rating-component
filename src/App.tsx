@@ -2,6 +2,8 @@ import React, { useState, ChangeEvent } from 'react';
 import StarRating from './StarRating';
 import styled from 'styled-components';
 
+const numberRegex = /^[0-9]*$/;
+
 const App = () => {
   const [formData, setFormData] = useState({
     now: '45',
@@ -11,6 +13,8 @@ const App = () => {
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
+    if (!numberRegex.test(value)) return;
 
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };

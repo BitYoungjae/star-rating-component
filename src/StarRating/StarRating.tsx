@@ -23,20 +23,20 @@ const StarRating: React.FC<StarRatingProps> = ({
   const blankStars = maximumStars - filledStars - 1;
   const remain = ((now % perStar) / perStar) * 100;
 
-  console.log({
-    now,
-    max,
-    perStar,
-    filledStars,
-    blankStars,
-  });
-
   if (
-    !Number.isFinite(perStar) ||
-    !Number.isFinite(filledStars) ||
-    !Number.isFinite(blankStars) ||
-    !Number.isFinite(remain)
+    isInInvalidNumber([
+      now,
+      max,
+      maximumStars,
+      perStar,
+      filledStars,
+      blankStars,
+      remain,
+    ])
   ) {
+    console.warn(`잘 못된 값이 입력되고 있습니다.`);
+    console.warn({ now, max, maximumStars });
+
     return (
       <StarBox>
         {Array(maximumStars)
@@ -54,7 +54,7 @@ const StarRating: React.FC<StarRatingProps> = ({
     );
   }
 
-  if (now > max) {
+  if (now > max || blankStars < 0) {
     return (
       <StarBox>
         {Array(maximumStars)
@@ -107,6 +107,10 @@ const StarRating: React.FC<StarRatingProps> = ({
       )}
     </StarBox>
   );
+};
+
+const isInInvalidNumber = (list: number[]) => {
+  return list.some((v) => Number.isNaN(v) || !Number.isFinite(v));
 };
 
 export default StarRating;
